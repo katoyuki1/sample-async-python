@@ -20,14 +20,14 @@ Python 3.11からは、asyncio.waitにコルーチンを直接渡すことが禁
 
 修正前:  
 `
-download_coroutines = [download_file(file) for file in files_lst]
-completed, pending = await asyncio.wait(download_coroutines, return_when=asyncio.ALL_COMPLETED)
+download_coroutines = [download_file(file) for file in files_lst]  
+completed, pending = await asyncio.wait(download_coroutines, return_when=asyncio.ALL_COMPLETED)  
 `
 
 修正後:  
 `
-download_tasks = [asyncio.create_task(download_file(file)) for file in files_lst]
-completed, pending = await asyncio.wait(download_tasks, return_when=asyncio.ALL_COMPLETED)
+download_tasks = [asyncio.create_task(download_file(file)) for file in files_lst]  
+completed, pending = await asyncio.wait(download_tasks, return_when=asyncio.ALL_COMPLETED)  
 `
 
 # RuntimeWarning: coroutine 'download_file' was never awaited
